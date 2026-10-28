@@ -1,0 +1,976 @@
+{
+  "schema_version": 1,
+  "purpose": "Questions authored independently of the implementation. The review and validation groups record separate evaluations; both have now been inspected and must not be described as untouched in future tuning. Required source text measures retrieval, not generated-answer accuracy. Use scripts/score_search.py --group review or --group validation to score a group separately.",
+  "cases": [
+    {
+      "id": "stop-gradient-branch",
+      "query": "How do I stop gradients from flowing back through part of my computation?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.stop_gradient.html#mlx-core-stop-gradient",
+          "The operation is the identity but it prevents gradients from flowing through the array."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "cap-memory-use",
+      "query": "Can I set an upper bound on how much memory MLX uses while my training runs?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.set_memory_limit.html#mlx-core-set-memory-limit",
+          "The memory limit is a guideline for the maximum amount of memory to use during graph evaluation."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "recompute-activations",
+      "query": "My backward pass runs out of memory on a deep model. Can I recompute intermediate values instead of keeping them all?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.checkpoint.html#mlx-core-checkpoint",
+          "Use this to reduce memory use for gradient computations at the expense of increased computation."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "compiled-fn-global-list",
+      "query": "I appended results to an outer Python list inside a compiled function and now printing that list crashes. What is going on?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/compile.html#pure-functions",
+          "The placeholder does not have any data; it is only used to build the computation graph."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "how-often-to-force-compute",
+      "query": "In a training loop, how often should I force MLX to actually run the computation, and is a very large graph a problem?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/lazy_evaluation.html#when-to-evaluate",
+          "Luckily, a wide range of compute graph sizes work pretty well with MLX"
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "index-out-of-range-no-error",
+      "query": "I indexed past the end of an array on the GPU and got garbage instead of an exception. Why is there no error?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/indexing.html#differences-from-numpy",
+          "The reason for the lack of bounds checking is that exceptions cannot propagate from the GPU."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "scatter-add-duplicate-indices",
+      "query": "When several updates hit the same index in an indexed add, only one of them seems to apply. How do I accumulate all of them?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.array.at.html#mlx-core-array-at",
+          "As a result, assigning to the same index ignores all but one update."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "copy-arrays-to-gpu",
+      "query": "Do I have to copy my arrays from CPU memory to GPU memory before running an operation on the GPU?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html#unified-memory",
+          "In MLX, rather than moving arrays to devices, you specify the device when you run the operation."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "resume-optimizer-state",
+      "query": "How do I checkpoint my optimizer so I can resume training with the same Adam moments?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/optimizers.html#saving-and-loading",
+          "To serialize an optimizer, save its state. To load an optimizer, load and set the saved state."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "save-function-for-other-frontend",
+      "query": "Can I save a traced MLX function to disk and run it later from a different front-end?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/export.html#exporting-functions",
+          "MLX has an API to export and import functions to and from a file."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "train-only-attention-weights",
+      "query": "I only want to train the attention weights of my transformer and leave everything else fixed.",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/nn/_autosummary/mlx.nn.Module.freeze.html#mlx-nn-module-freeze",
+          "Freezing a parameter means not computing gradients for it."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "distance-bias-on-attention",
+      "query": "I want attention scores biased by how far apart two tokens are so the model extrapolates to longer sequences. Is there a built-in layer?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/nn/_autosummary/mlx.nn.ALiBi.html#mlx-nn-alibi",
+          "ALiBi adds a static, non-learnable bias matrix to attention scores proportional to the distance between query and key tokens."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "different-optimizer-per-weight",
+      "query": "Can I use one optimizer for my embedding weights and a different one for the rest of the model?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/optimizers/_autosummary/mlx.optimizers.MultiOptimizer.html#mlx-optimizers-multioptimizer",
+          "to make it easy to use different optimizers for different weights"
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "warmup-then-decay-lr",
+      "query": "How do I build a learning rate that warms up linearly and then switches over to a cosine decay?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/optimizers/_autosummary/mlx.optimizers.join_schedules.html#mlx-optimizers-join-schedules",
+          "Join multiple schedules to create a new schedule."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "fused-loss-for-token-logits",
+      "query": "Is there a fused cross entropy loss for token logits in MLX, and does it also work on the CPU?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.fast.cross_entropy.html#mlx-core-fast-cross-entropy",
+          "The CPU falls back to the unfused version, which reduces in the dtype of the logits."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "sync-gradients-across-machines",
+      "query": "In data-parallel training across Macs, how do I average gradients without sending lots of tiny messages?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.nn.average_gradients.html#mlx-nn-average-gradients",
+          "This helper enables concatenating several gradients of small arrays to one big all reduce call for better networking performance."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "metal-kernel-slow-every-call",
+      "query": "I create a custom Metal kernel inside my model's forward pass and every call is slow. What is the right pattern?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/dev/custom_metal_kernels.html#simple-example",
+          "Every time you make a kernel, a new Metal library is created and possibly JIT compiled."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "cpp-op-where-compute-lives",
+      "query": "When adding a custom op in C++, where does the actual CPU or GPU compute code go versus the user-facing function?",
+      "package": "mlx",
+      "limit": 3,
+      "language": "cpp",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/dev/extensions.html#operations-and-primitives",
+          "Operations in MLX build the computation graph. Primitives provide the rules for evaluating and transforming the graph."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "lora-oom-32gb",
+      "query": "My LoRA fine-tune keeps running out of memory on a 32 GB Mac. What can I change to make it fit?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#memory-issues",
+          "Here are some tips to reduce memory use should you need to do so"
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "loss-on-answer-only",
+      "query": "During fine-tuning I only care about the model's answer, not the prompt. Can I leave the prompt out of the loss?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#prompt-masking",
+          "The default training computes a loss for every token in the sample."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "merge-adapter-and-publish",
+      "query": "I finished LoRA training. How do I merge the adapter weights into the base model and publish the result?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fuse",
+          "You can generate a model fused with the low-rank adapters"
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "smarter-quantization",
+      "query": "Plain 4-bit conversion hurts my model's accuracy. Are there smarter ways to quantize with less quality loss?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LEARNED_QUANTS.md#learned-quantization",
+          "To reduce the quality loss from quantization MLX LM has several options"
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "server-fetches-missing-model",
+      "query": "If I start the local server with a Hugging Face repo id that I have not downloaded yet, will it fetch it?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#http-model-server",
+          "The model will be downloaded from the provided Hugging Face repo if it is not already in the local cache."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "long-prompt-memory-spike",
+      "query": "Reading a very long prompt makes my memory spike. How can I lower the peak memory during prompt processing?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#long-prompts-and-generations",
+          "Smaller steps use less peak memory while the prompt is read, at some cost to prompt processing speed."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "slow-model-fits-in-ram",
+      "query": "The tool warns that generating with my model will be slow even though the model fits in RAM. Is there a system setting that speeds it up?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#large-models",
+          "If the model fits in RAM then it can often be sped up by increasing the system wired memory limit."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "custom-token-picker",
+      "query": "In the Python API, how do I supply my own function for picking the next token?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#sampling",
+          "A sampler is any callable which accepts a possibly batched logits array and returns an array of sampled tokens."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "pip-install-video-and-s3",
+      "query": "After pip install, can MLX Data load video files and pull data from S3 without extra setup?",
+      "package": "mlx-data",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/install.html#install-from-pypi",
+          "should install the package together with the necessary dependencies to read audio, images, video and remote content from S3"
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "huge-remote-dataset-no-random-access",
+      "query": "My dataset is huge, lives on remote storage and is nested, so I cannot index into it randomly. What should I build the pipeline on?",
+      "package": "mlx-data",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/buffers_streams_samples.html#streams",
+          "Often datasets are too big, stored remotely or are nested in ways that prevent random access."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "toggle-transforms-from-flags",
+      "query": "How can I switch dataset transforms on or off from command-line flags without a mess of if statements?",
+      "package": "mlx-data",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/dataset.html#conditional-operations",
+          "A common issue when writing pipelines is configuring them according to the command line or configuration arguments."
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "tokenizing-uses-one-core",
+      "query": "Tokenizing text in my data pipeline with a Python tokenizer only uses one core. How do I speed it up?",
+      "package": "mlx-data",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/tokenizing.html#tokenizing-with-mlx-data",
+          "subject to the GIL which means that effectively only one sample can be tokenized at a time"
+        ]
+      ],
+      "group": "review"
+    },
+    {
+      "id": "fresh-mlx-01",
+      "query": "In my MLX training loop I append loss.item() to a Python list before evaluating the updated parameters. Does collecting that scalar run any computation at that point?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Yes. Calling item() evaluates the scalar loss. At that point it can be a partial evaluation that computes only the forward pass.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/lazy_evaluation.html",
+          "Calling array.item() on a scalar array will also evaluate it."
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/lazy_evaluation.html",
+          "computing only the forward pass"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-02",
+      "query": "On Apple silicon, a GPU operation in my MLX program consumes the result of an earlier CPU operation. Do I need to copy the array between devices or add the dependency myself?",
+      "limit": 3,
+      "language": "all",
+      "package": "mlx",
+      "expected_answer": "No explicit array transfer is needed between those devices. MLX inserts the dependency between their streams so the consumer waits for its input.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html",
+          "without needing to move them from one memory location to another"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html",
+          "MLX will automatically insert a dependency between the two streams"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-03",
+      "query": "I ported NumPy code that takes b = a[:] and modifies b. Should the original MLX array a change too?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "No. An MLX slice creates a copy rather than a view, so modifying that slice does not modify the original array.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/indexing.html",
+          "slicing an array creates a copy, not a view."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-04",
+      "query": "Assigning x[mask] = 0 works in MLX. Can I also use x[mask] to return just the elements selected by the boolean mask?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Boolean mask indexing is supported for assignment only, so the corresponding selection expression is not supported.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/indexing.html",
+          "Boolean mask based indexing is supported for assignment only"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-05",
+      "query": "I'm compiling an MLX training step that includes Dropout. Besides the model and optimizer, what state needs to be captured for the random sampling?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Include mx.random.state in the state captured by compile().",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/compile.html",
+          "include mx.random.state in the state captured by compile()"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-06",
+      "query": "I want to vectorize f(example, weights) over a batch of examples while using the same weights for every example. How do I tell MLX not to add a mapped dimension to the weights argument?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Use vmap with in_axes=(0, None). None marks the weights input as not vectorized.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.vmap.html",
+          "in_axes"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.vmap.html",
+          "If the value is None then the corresponding input(s) are not vmapped."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-07",
+      "query": "My MLX loss has two positional parameter arrays and a trainable keyword argument. How do I request derivatives for selected positional arguments and for that keyword argument?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Use grad's argnums to select positional argument indices and argnames to select keyword arguments.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.grad.html",
+          "argnums"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.grad.html",
+          "Specify the index (or indices) of the positional arguments"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.grad.html",
+          "argnames"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.grad.html",
+          "Specify keyword arguments of fun to compute gradients with respect to."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-08",
+      "query": "I'm calling layer.freeze(keys=\"bias\"). How can I keep its submodules trainable and make a missing bias key raise a validation error?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Set recurse=False to avoid freezing submodules and strict=True to validate that the requested key exists.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/nn/_autosummary/mlx.nn.Module.freeze.html",
+          "If True then freeze the parameters of the submodules as well."
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/nn/_autosummary/mlx.nn.Module.freeze.html",
+          "If set to True validate that the passed keys exist."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-09",
+      "query": "I'm using Module.load_weights(strict=False) for a partial checkpoint. Does that mode still protect me from loading a tensor with the wrong shape?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "No. In non-strict mode only weights contained in the model are loaded, and their shapes are not checked.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/nn/_autosummary/mlx.nn.Module.load_weights.html",
+          "only the weights actually contained in the model are loaded and shapes are not checked."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-10",
+      "query": "I already have the gradient tree from nn.value_and_grad and an MLX optimizer object. What call applies those gradients to the network itself?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Call optimizer.update(model, gradients). It updates the model with the new parameters.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/optimizers/_autosummary/mlx.optimizers.Optimizer.update.html",
+          "update ( model : Module , gradients : dict )"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/optimizers/_autosummary/mlx.optimizers.Optimizer.update.html",
+          "update the model with the new parameters."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-11",
+      "query": "My image batches currently have PyTorch's NCHW layout. What axis order should I provide to an MLX Conv2d layer?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Provide NHWC, with channels last.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/nn/_autosummary/mlx.nn.Conv2d.html",
+          "The channels are expected to be last i.e. the input shape should be NHWC"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-12",
+      "query": "For cross_entropy in MLX, my logits are shaped (batch, classes) and the targets are integer class labels. Should the target array be (batch,) or (batch, 1) with the default class axis?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Use (batch,). The default class axis is -1, and class-index targets omit that dimension from the logits shape.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/nn/_autosummary_functions/mlx.nn.losses.cross_entropy.html",
+          "axis : int = -1"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/nn/_autosummary_functions/mlx.nn.losses.cross_entropy.html",
+          "targets shape should match the logits shape with the axis dimension removed."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-13",
+      "query": "I have one explicit MLX random key and need four subkeys for separate random operations. Which function makes them, and where does the number of subkeys appear in its result?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Call mx.random.split(key, num=4). It returns an array whose first dimension is num.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.random.split.html",
+          "split ( key : array , num : int = 2"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.random.split.html",
+          "The array of sub keys with num as its first dimension."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-14",
+      "query": "I'm implementing grouped-query attention with MLX's fast attention primitive. Do I need to repeat the key and value heads until they have as many heads as the queries?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "No. For grouped-query or multi-query attention, pass the key and value inputs without pre-tiling them to match q.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.fast.scaled_dot_product_attention.html",
+          "For Grouped Query Attention and Multi-Query Attention, the k and v inputs should not be pre-tiled to match q ."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-15",
+      "query": "Can mlx.core.quantize handle a flat vector directly? What shape restrictions should I check before passing a weight array and a group size?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "The input must have at least two dimensions, and its last dimension must be divisible by group_size. A flat vector does not meet that contract.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.quantize.html",
+          "quantize only supports inputs with two or more dimensions with the last dimension divisible by group_size"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-16",
+      "query": "My MLX matrix multiplication inputs and outputs say float32, but I need to rule out reduced-precision matrix arithmetic. What setting requests full float32 when I launch the program?",
+      "limit": 3,
+      "language": "all",
+      "package": "mlx",
+      "expected_answer": "Launch the process with MLX_ENABLE_TF32=0 to keep those operations in full float32.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/precision.html",
+          "To keep these operations in full float32 , set MLX_ENABLE_TF32 to 0 when launching the process:"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-17",
+      "query": "I'm saving several named MLX arrays as safetensors. Do I pass them as separate positional arrays like savez, or does the writer expect a different input structure?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "save_safetensors takes a dictionary mapping string names to arrays.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/saving_and_loading.html",
+          "The functions save_safetensors() and save_gguf() are similar to savez()"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/saving_and_loading.html",
+          "they take as input a dict of string names to arrays"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-18",
+      "query": "Converting an MLX bfloat16 array with np.array raises a buffer-format error. What conversion should I do before handing the values to NumPy?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Convert the MLX array to float16 or float32 first because NumPy does not support bfloat16 arrays.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/usage/numpy.html",
+          "Since NumPy does not support bfloat16 arrays, you will need to convert to float16 or float32 first:"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-19",
+      "query": "I have a linear system A X = B and want MLX to compute X directly instead of explicitly forming an inverse. Which linear algebra function should I use?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Use mlx.core.linalg.solve(a, b), which returns the unique solution of AX = B.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.linalg.solve.html",
+          "solve ( a : array , b : array"
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.linalg.solve.html",
+          "The unique solution to the system AX = B ."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-mlx-20",
+      "query": "I want the memory high-water mark for one section of an MLX program instead of the whole process lifetime. How do I start a new measurement window and read its peak in bytes?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx",
+      "expected_answer": "Call reset_peak_memory() before the section, then get_peak_memory(). The getter reports bytes and records its maximum since the last reset.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.reset_peak_memory.html",
+          "Reset the peak memory to zero."
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.get_peak_memory.html",
+          "Get the peak amount of used memory in bytes."
+        ],
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.get_peak_memory.html",
+          "since the last call to reset_peak_memory()"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-lm-01",
+      "query": "In a Python application using MLX LM, how can I print the generated text as it arrives instead of waiting for the complete answer string?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx-lm",
+      "expected_answer": "Iterate over stream_generate(model, tokenizer, prompt, ...) and print each response.text as it arrives.",
+      "support": [
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/README.md",
+          "stream_generate(model, tokenizer, prompt, max_tokens=512)"
+        ],
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/README.md",
+          "print(response.text, end=\"\", flush=True)"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-lm-02",
+      "query": "I cached a long document with MLX LM and now supply a new question when generating. Does the new prompt replace the cached document, or is it added after it?",
+      "limit": 3,
+      "language": "all",
+      "package": "mlx-lm",
+      "expected_answer": "The cached prompt is a prefix to the supplied prompt, so the new question follows the cached context.",
+      "support": [
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/README.md",
+          "The cached prompt is treated as a prefix to the supplied prompt."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-lm-03",
+      "query": "When fine-tuning with mlx_lm.lora, how do I train only on the assistant completion rather than the prompt? Is that option available for a plain text dataset too?",
+      "limit": 3,
+      "language": "all",
+      "package": "mlx-lm",
+      "expected_answer": "Pass --mask-prompt. It is supported only for chat and completion datasets, not plain text datasets.",
+      "support": [
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md",
+          "compute loss for just the completion by passing\n`--mask-prompt`"
+        ],
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md",
+          "only supported for `chat` and `completion`\ndatasets."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-lm-04",
+      "query": "If I enable KV-cache quantization on the MLX LM HTTP server, can it still batch several clients' generation requests together?",
+      "limit": 3,
+      "language": "all",
+      "package": "mlx-lm",
+      "expected_answer": "No. With --kv-bits enabled, the server processes requests one at a time because the quantized KV cache does not support batching.",
+      "support": [
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md",
+          "A quantized KV cache does not support batching."
+        ],
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md",
+          "one at a time when you set `--kv-bits`."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-lm-05",
+      "query": "How can I inspect just a selected family of downloaded MLX LM models from the command line, and where are those local downloads stored?",
+      "limit": 3,
+      "language": "all",
+      "package": "mlx-lm",
+      "expected_answer": "Use mlx_lm.manage --scan --pattern with the desired model pattern. The models are stored in the Hugging Face cache.",
+      "support": [
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/MANAGE.md",
+          "mlx_lm.manage --scan --pattern mlx-community/Mistral-7B-Instruct-v0.2-4bit"
+        ],
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/MANAGE.md",
+          "They\nare stored in the Hugging Face cache."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-lm-06",
+      "query": "I want to try different high-bit and low-bit choices with MLX LM dynamic quantization on the same model. What can I reuse so I don't have to estimate which layers are sensitive again?",
+      "limit": 3,
+      "language": "all",
+      "package": "mlx-lm",
+      "expected_answer": "Reuse the JSON file of per-layer sensitivities produced by dynamic quantization, passing its path with --sensitivities.",
+      "support": [
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LEARNED_QUANTS.md",
+          "The script also saves a JSON file with each layer's sensitivities"
+        ],
+        [
+          "https://raw.githubusercontent.com/ml-explore/mlx-lm/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LEARNED_QUANTS.md",
+          "`--sensitivities`: A path to a precomputed sensitivities file."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-data-01",
+      "query": "In MLX Data, one input needs a known length and random access, while another is consumed continuously and may never end. Should I use the same container type for both?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx-data",
+      "expected_answer": "Use a Buffer for the input requiring a known length and random access. A Stream is a potentially infinite iterable suitable for the continuous input.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/buffers_streams_samples.html",
+          "They have a known length and they can be shuffled or accessed in random order."
+        ],
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/buffers_streams_samples.html",
+          "A Stream is a potentially infinite iterable of samples."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-data-02",
+      "query": "My token sequences vary greatly in length, so fixed-size batches in MLX Data waste a lot of padding. What stream operation can keep roughly the same amount of token work in each batch?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx-data",
+      "expected_answer": "Use Stream.dynamic_batch. It targets approximately the same number of total elements per batch and reduces padding waste for variable-size samples.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Stream.dynamic_batch.html",
+          "Stream. dynamic_batch"
+        ],
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Stream.dynamic_batch.html",
+          "Dynamic batching returns batches with approximately the same number of total elements."
+        ],
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Stream.dynamic_batch.html",
+          "minimize padding and waste of computation"
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-data-03",
+      "query": "I want MLX Data to load samples in background threads, but evaluation must see them in the original buffer order. Which prefetch operation provides that ordering guarantee?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx-data",
+      "expected_answer": "Use Buffer.ordered_prefetch, which fetches in background threads while preserving the original order.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Buffer.ordered_prefetch.html",
+          "Buffer. ordered_prefetch"
+        ],
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Buffer.ordered_prefetch.html",
+          "Fetch samples in background threads, while preserving original ordering."
+        ]
+      ],
+      "group": "validation"
+    },
+    {
+      "id": "fresh-data-04",
+      "query": "For each sample in an MLX Data buffer I want to split an array's first dimension into several shards, but keep the original array under its current key. How can I store the reshaped result separately?",
+      "limit": 3,
+      "language": "python",
+      "package": "mlx-data",
+      "expected_answer": "Use Buffer.shard on the input key with num_shards, and set a nonempty output_key so the result goes to a different key instead of overwriting the input.",
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Buffer.shard.html",
+          "Split the first dimension in num_shards ."
+        ],
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Buffer.shard.html",
+          "output_key"
+        ],
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Buffer.shard.html",
+          "If it is not empty then write the result to this key instead of overwriting key ."
+        ]
+      ],
+      "group": "validation"
+    }
+  ]
+}

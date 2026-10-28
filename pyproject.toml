@@ -1,0 +1,103 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mlx-mcp"
+dynamic = ["version"]
+description = "Search the MLX, MLX Data and MLX LM docs from Claude Code, Codex or any MCP client"
+readme = "README.md"
+requires-python = ">=3.13,<3.15"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+authors = [
+  { name = "Alfredo Sandoval" },
+  { name = "Joseph Sandoval" },
+]
+maintainers = [
+  { name = "Alfredo Sandoval" },
+  { name = "Joseph Sandoval" },
+]
+keywords = ["mlx", "mcp", "model-context-protocol", "documentation", "search", "apple-silicon"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Documentation",
+]
+# Lower bounds are the lowest versions that install as macOS 14 arm64 wheels
+# and pass the offline tests (uv pip compile --resolution lowest-direct).
+# anyio 4.14.2 is a security floor. On 2026-10-25 OSV listed no advisories
+# for that lowest set.
+dependencies = [
+  "anyio>=4.14.2,<5",
+  "beautifulsoup4>=4.12,<5",
+  "huggingface-hub>=1.31,<3",
+  "markdown-it-py>=4,<5",
+  "markdownify>=1.2,<2",
+  "mcp>=2.2.0,<3",
+  "mlx>=0.29.4,<1",
+  "numpy>=2.1,<3",
+  "pydantic>=2.12,<3",
+  "tokenizers>=0.23.1,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "hatchling>=1.27,<2",
+  "hypothesis>=6.85,<7",
+  "pyright==1.1.414",
+  "pytest>=9.0.3",
+  "ruff>=0.16.6",
+]
+
+[project.scripts]
+mlx-mcp = "mlx_mcp.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Alfredo-Sandoval/mlx-mcp"
+Issues = "https://github.com/Alfredo-Sandoval/mlx-mcp/issues"
+
+[tool.uv]
+# mcp pulls in opentelemetry-api. 1.45.1 fixes unbounded tracestate parsing
+# (GHSA-xcq7-p3pf-p88h). This floor applies to uv.lock only, not to installs.
+constraint-dependencies = ["opentelemetry-api>=1.45.1"]
+# mlx-mcp runs only on Apple silicon Macs; resolve nothing else.
+environments = ["sys_platform == 'darwin' and platform_machine == 'arm64'"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mlx_mcp"]
+# The prebuilt docs index is generated and is not tracked in git.
+artifacts = ["src/mlx_mcp/data/index.npz"]
+
+[tool.hatch.build.targets.sdist]
+artifacts = ["src/mlx_mcp/data/index.npz"]
+# Hatchling adds pyproject.toml, the readme, license files and .gitignore.
+only-include = ["src/mlx_mcp"]
+
+[tool.hatch.version]
+path = "src/mlx_mcp/__init__.py"
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+
+[tool.pyright]
+include = ["scripts","src","tests"]
+extraPaths = ["src"]
+pythonVersion = "3.13"
+typeCheckingMode = "strict"
+enableTypeIgnoreComments = false
+reportUnnecessaryTypeIgnoreComment = "error"
+
+[tool.ruff.lint]
+extend-select = ["TID251", "ANN401"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"typing.Any" = {msg = "Use a precise type and parse untyped values at the boundary."}
+"typing_extensions.Any" = {msg = "Use a precise type and parse untyped values at the boundary."}

@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "truncation": {
+    "direction": "Right",
+    "max_length": 512,
+    "strategy": "LongestFirst",
+    "stride": 0
+  },
+  "padding": null,
+  "added_tokens": [],
+  "normalizer": null,
+  "pre_tokenizer": {
+    "type": "Whitespace"
+  },
+  "post_processor": null,
+  "decoder": null,
+  "model": {
+    "type": "WordLevel",
+    "vocab": {
+      "[UNK]": 0,
+      "word": 1
+    },
+    "unk_token": "[UNK]"
+  }
+}

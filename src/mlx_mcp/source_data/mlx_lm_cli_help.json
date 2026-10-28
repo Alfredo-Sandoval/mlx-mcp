@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "package": "mlx-lm",
+  "version": "0.32.2",
+  "wheel_filename": "mlx_lm-0.32.2-py3-none-any.whl",
+  "captured_at": "2026-10-27T15:33:59.133014+00:00",
+  "python_version": "3.13.17",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "mlx_version": "0.32.4",
+  "commands": [
+    {
+      "name": "mlx_lm",
+      "argv": [
+        "mlx_lm",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "The supported subcommands are ('benchmark', 'cache_prompt', 'chat', 'convert', 'evaluate', 'fuse', 'generate', 'lora', 'manage', 'perplexity', 'awq', 'dwq', 'dynamic_quant', 'gptq', 'server', 'upload', 'share')\n\nFor help on an individual subcommand, pass --help to the subcommand. For example: mlx_lm.generate --help\n"
+    },
+    {
+      "name": "mlx_lm.awq",
+      "argv": [
+        "mlx_lm.awq",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.awq [-h] [--model MODEL] [--mlx-path MLX_PATH] [--bits BITS]\n                  [--group-size GROUP_SIZE] [--embed-bits EMBED_BITS]\n                  [--embed-group-size EMBED_GROUP_SIZE] [--num-samples NUM_SAMPLES]\n                  [--sequence-length SEQUENCE_LENGTH] [--n-grid N_GRID] [--seed SEED]\n                  [--trust-remote-code]\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL, -m MODEL\n  --mlx-path MLX_PATH\n  --bits BITS\n  --group-size GROUP_SIZE\n  --embed-bits EMBED_BITS\n  --embed-group-size EMBED_GROUP_SIZE\n  --num-samples NUM_SAMPLES\n  --sequence-length SEQUENCE_LENGTH\n  --n-grid N_GRID\n  --seed SEED\n  --trust-remote-code   Enable trusting remote code for tokenizer/model loading.\n"
+    },
+    {
+      "name": "mlx_lm.benchmark",
+      "argv": [
+        "mlx_lm.benchmark",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.benchmark [-h] [--model MODEL] [--prompt-tokens PROMPT_TOKENS]\n                        [--generation-tokens GENERATION_TOKENS] [--batch-size BATCH_SIZE]\n                        [--num-trials NUM_TRIALS] [--pipeline] [--quantize-activations]\n                        [--prefill-step-size PREFILL_STEP_SIZE] [--delay DELAY]\n                        [--trust-remote-code]\n\nLLM benchmarking script\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         The path to the local model directory or Hugging Face repo. If no model is\n                        specified, then mlx-community/Llama-3.2-3B-Instruct-4bit is used.\n  --prompt-tokens PROMPT_TOKENS, -p PROMPT_TOKENS\n                        Length of prompt\n  --generation-tokens GENERATION_TOKENS, -g GENERATION_TOKENS\n                        Length of completion\n  --batch-size BATCH_SIZE, -b BATCH_SIZE\n                        Batch size\n  --num-trials NUM_TRIALS, -n NUM_TRIALS\n                        Number of timing trials\n  --pipeline            Use pipelining instead of tensor parallelism\n  --quantize-activations, -qa\n                        Quantize activations using the same quantization config as the\n                        corresponding layer.\n  --prefill-step-size PREFILL_STEP_SIZE\n                        Step size for prefill processing (default: 2048)\n  --delay DELAY         Delay between each test in seconds (default: 0)\n  --trust-remote-code   Enable trusting remote code for tokenizer/model loading.\n"
+    },
+    {
+      "name": "mlx_lm.cache_prompt",
+      "argv": [
+        "mlx_lm.cache_prompt",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.cache_prompt [-h] [--model MODEL] [--adapter-path ADAPTER_PATH]\n                           [--trust-remote-code] [--eos-token EOS_TOKEN]\n                           [--max-kv-size MAX_KV_SIZE] --prompt-cache-file PROMPT_CACHE_FILE\n                           --prompt PROMPT [--kv-bits KV_BITS] [--kv-group-size KV_GROUP_SIZE]\n                           [--quantized-kv-start QUANTIZED_KV_START]\n\nCache the state of a prompt to be reused with mlx_lm.generate\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         The path to the local model directory or Hugging Face repo.\n  --adapter-path ADAPTER_PATH\n                        Optional path for the trained adapter weights and config.\n  --trust-remote-code   Enable trusting remote code for tokenizer\n  --eos-token EOS_TOKEN\n                        End of sequence token for tokenizer\n  --max-kv-size MAX_KV_SIZE\n                        Set the maximum key-value cache size\n  --prompt-cache-file PROMPT_CACHE_FILE\n                        The file to save the prompt cache in\n  --prompt PROMPT       Message to be processed by the model ('-' reads from stdin)\n  --kv-bits KV_BITS     Number of bits for KV cache quantization. Defaults to no quantization.\n  --kv-group-size KV_GROUP_SIZE\n                        Group size for KV cache quantization.\n  --quantized-kv-start QUANTIZED_KV_START\n                        When --kv-bits is set, start quantizing the KV cache from this step\n                        onwards.\n"
+    },
+    {
+      "name": "mlx_lm.chat",
+      "argv": [
+        "mlx_lm.chat",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.chat [-h] [--model MODEL] [--trust-remote-code] [--adapter-path ADAPTER_PATH]\n                   [--temp TEMP] [--top-p TOP_P] [--xtc-probability XTC_PROBABILITY]\n                   [--xtc-threshold XTC_THRESHOLD] [--seed SEED] [--max-kv-size MAX_KV_SIZE]\n                   [--prefill-step-size PREFILL_STEP_SIZE] [--max-tokens MAX_TOKENS]\n                   [--system-prompt SYSTEM_PROMPT] [--pipeline]\n\nChat with an LLM\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         The path to the local model directory or Hugging Face repo.\n  --trust-remote-code   Enable trusting remote code for tokenizer\n  --adapter-path ADAPTER_PATH\n                        Optional path for the trained adapter weights and config.\n  --temp TEMP           Sampling temperature\n  --top-p TOP_P         Sampling top-p\n  --xtc-probability XTC_PROBABILITY\n                        Probability of XTC sampling to happen each next token\n  --xtc-threshold XTC_THRESHOLD\n                        Thresold the probs of each next token candidate to be sampled by XTC\n  --seed SEED           PRNG seed\n  --max-kv-size MAX_KV_SIZE\n                        Set the maximum key-value cache size\n  --prefill-step-size PREFILL_STEP_SIZE\n                        Number of prompt tokens to process at a time. Smaller values lower peak\n                        memory during prefill (default: 2048)\n  --max-tokens MAX_TOKENS, -m MAX_TOKENS\n                        Maximum number of tokens to generate\n  --system-prompt SYSTEM_PROMPT\n                        System prompt to be used for the chat template\n  --pipeline            Use pipelining instead of tensor parallelism\n"
+    },
+    {
+      "name": "mlx_lm.convert",
+      "argv": [
+        "mlx_lm.convert",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.convert [-h] [--hf-path HF_PATH] [--mlx-path MLX_PATH] [-q]\n                      [--q-group-size Q_GROUP_SIZE] [--q-bits Q_BITS]\n                      [--q-mode {affine,mxfp4,nvfp4,mxfp8}]\n                      [--quant-predicate {mixed_2_6,mixed_3_4,mixed_3_6,mixed_4_6}]\n                      [--dtype {float16,bfloat16,float32}] [--upload-repo UPLOAD_REPO] [-d]\n                      [--trust-remote-code]\n\nConvert Hugging Face model to MLX format\n\noptions:\n  -h, --help            show this help message and exit\n  --hf-path HF_PATH, --model HF_PATH\n                        Path to the model. This can be a local path or a Hugging Face Hub model\n                        identifier.\n  --mlx-path MLX_PATH   Path to save the MLX model.\n  -q, --quantize        Generate a quantized model.\n  --q-group-size Q_GROUP_SIZE\n                        Group size for quantization.\n  --q-bits Q_BITS       Bits per weight for quantization.\n  --q-mode {affine,mxfp4,nvfp4,mxfp8}\n                        The quantization mode.\n  --quant-predicate {mixed_2_6,mixed_3_4,mixed_3_6,mixed_4_6}\n                        Mixed-bit quantization recipe.\n  --dtype {float16,bfloat16,float32}\n                        Type to save the non-quantized parameters. Defaults to config.json's\n                        `torch_dtype` or the current model weights dtype.\n  --upload-repo UPLOAD_REPO\n                        The Hugging Face repo to upload the model to.\n  -d, --dequantize      Dequantize a quantized model.\n  --trust-remote-code   Trust remote code when loading tokenizer.\n"
+    },
+    {
+      "name": "mlx_lm.dwq",
+      "argv": [
+        "mlx_lm.dwq",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.dwq [-h] --model MODEL [--quantized-model QUANTIZED_MODEL] [--mlx-path MLX_PATH]\n                  [--bits BITS] [--group-size GROUP_SIZE] [--num-samples NUM_SAMPLES]\n                  [--max-seq-length MAX_SEQ_LENGTH] [--seed SEED] [--learning-rate LEARNING_RATE]\n                  [--batch-size BATCH_SIZE] [--data-path DATA_PATH] [--grad-checkpoint]\n                  [--target-dir TARGET_DIR] [--targets-only] [--pipeline] [--trust-remote-code]\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL, -m MODEL\n                        A model to distill from for DWQ. If `quantized-model` is not given the\n                        student model will be this model quantized according to `bits` and `group-\n                        size`.\n  --quantized-model QUANTIZED_MODEL\n                        An already quantized model (the student model) to improve with DWQ.\n  --mlx-path MLX_PATH   Path to save the quantized model.\n  --bits BITS           Bits per weight for quantization.\n  --group-size GROUP_SIZE\n                        Group size for quantization.\n  --num-samples NUM_SAMPLES\n                        Number of samples to use for training.\n  --max-seq-length MAX_SEQ_LENGTH\n  --seed SEED\n  --learning-rate LEARNING_RATE\n  --batch-size BATCH_SIZE\n  --data-path DATA_PATH\n                        A Hugging Face dataset which is compatible with an mlx-lm dataset format.\n  --grad-checkpoint     Use gradient checkpointing to reduce memory use.\n  --target-dir TARGET_DIR\n                        Directory to save/load targets.\n  --targets-only        Compute the targets and exit.\n  --pipeline            Use pipeline parallel instead of data parallel.\n  --trust-remote-code   Enable trusting remote code for tokenizer/model loading.\n"
+    },
+    {
+      "name": "mlx_lm.dynamic_quant",
+      "argv": [
+        "mlx_lm.dynamic_quant",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.dynamic_quant [-h] [--model MODEL] [--mlx-path MLX_PATH] [--seed SEED]\n                            [--sensitivities SENSITIVITIES] [--target-bpw TARGET_BPW]\n                            [--low-bits LOW_BITS] [--low-group-size LOW_GROUP_SIZE]\n                            [--high-bits HIGH_BITS] [--high-group-size HIGH_GROUP_SIZE]\n                            [--report-ppl] [--grad-checkpoint]\n                            [--accumulation-dtype {float32,bfloat16}] [--trust-remote-code]\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL, -m MODEL\n  --mlx-path MLX_PATH   Path to save the model\n  --seed SEED\n  --sensitivities SENSITIVITIES\n                        Path to a pre-computed sensitivity JSON file.\n  --target-bpw TARGET_BPW\n                        Target bits per weight.\n  --low-bits LOW_BITS\n  --low-group-size LOW_GROUP_SIZE\n  --high-bits HIGH_BITS\n  --high-group-size HIGH_GROUP_SIZE\n  --report-ppl          Compute the perplexity of the base and quantized models.\n  --grad-checkpoint     Use gradient checkpointing to reduce memory use.\n  --accumulation-dtype {float32,bfloat16}\n                        What type to use to accumulate the gradients for the sensitivities\n  --trust-remote-code   Enable trusting remote code for tokenizer/model loading.\n"
+    },
+    {
+      "name": "mlx_lm.evaluate",
+      "argv": [
+        "mlx_lm.evaluate",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: Evaluate an MLX model using lm-evaluation-harness. [-h] --model MODEL --tasks TASKS\n                                                          [TASKS ...] [--output-dir OUTPUT_DIR]\n                                                          [--batch-size BATCH_SIZE]\n                                                          [--num-shots NUM_SHOTS]\n                                                          [--max-tokens MAX_TOKENS]\n                                                          [--limit LIMIT] [--seed SEED]\n                                                          [--fewshot-as-multiturn]\n                                                          [--apply-chat-template | --no-apply-chat-template]\n                                                          [--chat-template-args CHAT_TEMPLATE_ARGS]\n                                                          [--confirm-run-unsafe-code]\n                                                          [--trust-remote-code] [--temp TEMP]\n                                                          [--top-p TOP_P] [--top-k TOP_K]\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         Model to evaluate\n  --tasks TASKS [TASKS ...]\n  --output-dir OUTPUT_DIR\n                        Output directory for result files.\n  --batch-size BATCH_SIZE\n                        Maximum number of sequences processed at once, both when scoring and when\n                        generating.\n  --num-shots NUM_SHOTS\n                        Number of shots\n  --max-tokens MAX_TOKENS\n                        Maximum number of tokens to generate. When set, this value takes\n                        precedence over task specific defaults.\n  --limit LIMIT         Limit the number of examples per task.\n  --seed SEED           Random seed.\n  --fewshot-as-multiturn\n                        Whether to provide the fewshot examples as a multiturn conversation or a\n                        single user turn.\n  --apply-chat-template, --no-apply-chat-template\n                        Specifies whether to apply a chat template to the prompt. If the model has\n                        a chat template, this defaults to `True`, otherwise `False`.\n  --chat-template-args CHAT_TEMPLATE_ARGS\n                        A JSON formatted string of arguments for the tokenizer's\n                        apply_chat_template, e.g. '{\"enable_thinking\":false}'\n  --confirm-run-unsafe-code\n                        Confirm that you want to run tasks that execute untrusted code.\n  --trust-remote-code   Enable trusting remote code for tokenizer\n  --temp TEMP           Sampling temperature\n  --top-p TOP_P         Sampling top-p\n  --top-k TOP_K         Sampling top-k\n"
+    },
+    {
+      "name": "mlx_lm.fuse",
+      "argv": [
+        "mlx_lm.fuse",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "Loading pretrained model\nusage: mlx_lm.fuse [-h] [--model MODEL] [--save-path SAVE_PATH] [--adapter-path ADAPTER_PATH]\n                   [--upload-repo UPLOAD_REPO] [--dequantize] [--export-gguf]\n                   [--gguf-path GGUF_PATH] [--trust-remote-code]\n\nFuse fine-tuned adapters into the base model.\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         The path to the local model directory or Hugging Face repo.\n  --save-path SAVE_PATH\n                        The path to save the fused model.\n  --adapter-path ADAPTER_PATH\n                        Path to the trained adapter weights and config.\n  --upload-repo UPLOAD_REPO\n                        The Hugging Face repo to upload the model to.\n  --dequantize          Generate a dequantized model.\n  --export-gguf         Export model weights in GGUF format.\n  --gguf-path GGUF_PATH\n                        Path to save the exported GGUF format model weights. Default is ggml-\n                        model-f16.gguf.\n  --trust-remote-code   Enable trusting remote code for tokenizer/model loading.\n"
+    },
+    {
+      "name": "mlx_lm.generate",
+      "argv": [
+        "mlx_lm.generate",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.generate [-h] [--model MODEL] [--trust-remote-code] [--adapter-path ADAPTER_PATH]\n                       [--extra-eos-token EXTRA_EOS_TOKEN [EXTRA_EOS_TOKEN ...]]\n                       [--system-prompt SYSTEM_PROMPT] [--prompt PROMPT]\n                       [--image IMAGE [IMAGE ...]] [--prefill-response PREFILL_RESPONSE]\n                       [--max-tokens MAX_TOKENS] [--temp TEMP] [--top-p TOP_P] [--min-p MIN_P]\n                       [--top-k TOP_K] [--xtc-probability XTC_PROBABILITY]\n                       [--xtc-threshold XTC_THRESHOLD] [--min-tokens-to-keep MIN_TOKENS_TO_KEEP]\n                       [--seed SEED] [--ignore-chat-template] [--use-default-chat-template]\n                       [--chat-template-config CHAT_TEMPLATE_CONFIG] [--verbose VERBOSE]\n                       [--max-kv-size MAX_KV_SIZE] [--prefill-step-size PREFILL_STEP_SIZE]\n                       [--prompt-cache-file PROMPT_CACHE_FILE] [--quantize-activations]\n                       [--kv-bits KV_BITS] [--kv-group-size KV_GROUP_SIZE]\n                       [--quantized-kv-start QUANTIZED_KV_START] [--draft-model DRAFT_MODEL]\n                       [--num-draft-tokens NUM_DRAFT_TOKENS]\n\nLLM inference script\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         The path to the local model directory or Hugging Face repo. If no model is\n                        specified, then mlx-community/Llama-3.2-3B-Instruct-4bit is used.\n  --trust-remote-code   Enable trusting remote code for tokenizer\n  --adapter-path ADAPTER_PATH\n                        Optional path for the trained adapter weights and config.\n  --extra-eos-token EXTRA_EOS_TOKEN [EXTRA_EOS_TOKEN ...]\n                        Add tokens in the list of eos tokens that stop generation.\n  --system-prompt SYSTEM_PROMPT\n                        System prompt to be used for the chat template\n  --prompt PROMPT, -p PROMPT\n                        Message to be processed by the model ('-' reads from stdin)\n  --image IMAGE [IMAGE ...]\n                        Image files for the image placeholders of the prompt, in order.\n  --prefill-response PREFILL_RESPONSE\n                        Prefill response to be used for the chat template\n  --max-tokens MAX_TOKENS, -m MAX_TOKENS\n                        Maximum number of tokens to generate\n  --temp TEMP           Sampling temperature\n  --top-p TOP_P         Sampling top-p\n  --min-p MIN_P         Sampling min-p\n  --top-k TOP_K         Sampling top-k\n  --xtc-probability XTC_PROBABILITY\n                        Probability of XTC sampling to happen each next token\n  --xtc-threshold XTC_THRESHOLD\n                        Threshold the probs of each next token candidate to be sampled by XTC\n  --min-tokens-to-keep MIN_TOKENS_TO_KEEP\n                        Minimum tokens to keep for min-p sampling.\n  --seed SEED           PRNG seed\n  --ignore-chat-template\n                        Use the raw prompt without the tokenizer's chat template.\n  --use-default-chat-template\n                        Use the default chat template\n  --chat-template-config CHAT_TEMPLATE_CONFIG\n                        Additional config for `apply_chat_template`. Should be a dictionary of\n                        string keys to values represented as a JSON decodable string.\n  --verbose VERBOSE     Log verbose output when 'True' or 'T' or only print the response when\n                        'False' or 'F'\n  --max-kv-size MAX_KV_SIZE\n                        Set the maximum key-value cache size\n  --prefill-step-size PREFILL_STEP_SIZE\n                        Number of prompt tokens to process at a time. Smaller values lower peak\n                        memory during prefill (default: 2048)\n  --prompt-cache-file PROMPT_CACHE_FILE\n                        A file containing saved KV caches to avoid recomputing them\n  --quantize-activations, -qa\n                        Quantize activations using the same quantization config as the\n                        corresponding layer.\n  --kv-bits KV_BITS     Number of bits for KV cache quantization. Defaults to no quantization.\n  --kv-group-size KV_GROUP_SIZE\n                        Group size for KV cache quantization.\n  --quantized-kv-start QUANTIZED_KV_START\n                        When --kv-bits is set, start quantizing the KV cache from this step\n                        onwards.\n  --draft-model DRAFT_MODEL\n                        A model to be used for speculative decoding.\n  --num-draft-tokens NUM_DRAFT_TOKENS\n                        Number of tokens to draft when using speculative decoding.\n"
+    },
+    {
+      "name": "mlx_lm.gptq",
+      "argv": [
+        "mlx_lm.gptq",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.gptq [-h] [--model MODEL] [--mlx-path MLX_PATH] [--bits BITS]\n                   [--group-size GROUP_SIZE] [--fallback-bits FALLBACK_BITS]\n                   [--fallback-group-size FALLBACK_GROUP_SIZE] [--num-samples NUM_SAMPLES]\n                   [--sequence-length SEQUENCE_LENGTH] [--seed SEED] [--trust-remote-code]\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL, -m MODEL\n  --mlx-path MLX_PATH\n  --bits BITS           Quantization bits for GPTQ layers\n  --group-size GROUP_SIZE\n                        Quantization group size for GPTQ layers\n  --fallback-bits FALLBACK_BITS\n                        Quantization bits for non-GPTQ layers\n  --fallback-group-size FALLBACK_GROUP_SIZE\n                        Quantization group size for non-GPTQ layers\n  --num-samples NUM_SAMPLES\n                        Number of samples from the calibration dataset, use -1 for all.\n  --sequence-length SEQUENCE_LENGTH\n                        Sequence length for the calibration data.\n  --seed SEED\n  --trust-remote-code   Enable trusting remote code for tokenizer/model loading.\n"
+    },
+    {
+      "name": "mlx_lm.lora",
+      "argv": [
+        "mlx_lm.lora",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.lora [-h] [--model MODEL] [--train] [--data DATA]\n                   [--fine-tune-type {lora,dora,full}]\n                   [--optimizer {adam,adamw,muon,sgd,adafactor}] [--mask-prompt]\n                   [--num-layers NUM_LAYERS] [--batch-size BATCH_SIZE] [--iters ITERS]\n                   [--val-batches VAL_BATCHES] [--learning-rate LEARNING_RATE]\n                   [--steps-per-report STEPS_PER_REPORT] [--steps-per-eval STEPS_PER_EVAL]\n                   [--grad-accumulation-steps GRAD_ACCUMULATION_STEPS]\n                   [--resume-adapter-file RESUME_ADAPTER_FILE] [--adapter-path ADAPTER_PATH]\n                   [--save-every SAVE_EVERY] [--test] [--test-batches TEST_BATCHES]\n                   [--max-seq-length MAX_SEQ_LENGTH] [-c CONFIG] [--grad-checkpoint]\n                   [--clear-cache-threshold CLEAR_CACHE_THRESHOLD] [--report-to REPORT_TO]\n                   [--project-name PROJECT_NAME] [--seed SEED] [--trust-remote-code]\n\nLoRA or QLoRA finetuning.\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         The path to the local model directory or Hugging Face repo.\n  --train               Do training\n  --data DATA           Directory with {train, valid, test}.jsonl files or the name of a Hugging\n                        Face dataset (e.g., 'mlx-community/wikisql')\n  --fine-tune-type {lora,dora,full}\n                        Type of fine-tuning to perform: lora, dora, or full.\n  --optimizer {adam,adamw,muon,sgd,adafactor}\n                        Optimizer to use for training: adam, adamw, sgd, or adafactor.\n  --mask-prompt         Mask the prompt in the loss when training\n  --num-layers NUM_LAYERS\n                        Number of layers to fine-tune. Default is 16, use -1 for all.\n  --batch-size BATCH_SIZE\n                        Minibatch size.\n  --iters ITERS         Iterations to train for.\n  --val-batches VAL_BATCHES\n                        Number of validation batches, -1 uses the entire validation set.\n  --learning-rate LEARNING_RATE\n                        Adam learning rate.\n  --steps-per-report STEPS_PER_REPORT\n                        Number of training steps between loss reporting.\n  --steps-per-eval STEPS_PER_EVAL\n                        Number of training steps between validations.\n  --grad-accumulation-steps GRAD_ACCUMULATION_STEPS\n                        Number of steps to accumulate before each optimizer update.\n  --resume-adapter-file RESUME_ADAPTER_FILE\n                        Load path to resume training from the given fine-tuned weights.\n  --adapter-path ADAPTER_PATH\n                        Save/load path for the fine-tuned weights.\n  --save-every SAVE_EVERY\n                        Save the model every N iterations.\n  --test                Evaluate on the test set after training\n  --test-batches TEST_BATCHES\n                        Number of test set batches, -1 uses the entire test set.\n  --max-seq-length MAX_SEQ_LENGTH\n                        Maximum sequence length.\n  -c CONFIG, --config CONFIG\n                        A YAML configuration file with the training options\n  --grad-checkpoint     Use gradient checkpointing to reduce memory use.\n  --clear-cache-threshold CLEAR_CACHE_THRESHOLD\n                        Clear the allocator cache between steps if it grows too large.\n  --report-to REPORT_TO\n                        Services to report logs to ('wandb', 'swanlab', or 'wandb,swanlab').\n  --project-name PROJECT_NAME\n                        Project name for logging. Defaults to the name of the root directory.\n  --seed SEED           The PRNG seed\n  --trust-remote-code   Enable trusting remote code for tokenizer/model loading.\n"
+    },
+    {
+      "name": "mlx_lm.manage",
+      "argv": [
+        "mlx_lm.manage",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.manage [-h] [--scan] [--delete] [--pattern PATTERN]\n\nMLX Model Cache.\n\noptions:\n  -h, --help         show this help message and exit\n  --scan             Scan Hugging Face cache for mlx models.\n  --delete           Delete models matching the given pattern.\n  --pattern PATTERN  Model repos contain the pattern.\n"
+    },
+    {
+      "name": "mlx_lm.perplexity",
+      "argv": [
+        "mlx_lm.perplexity",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.perplexity [-h] --model MODEL [--trust-remote-code] [--batch-size BATCH_SIZE]\n                         [--sequence-length SEQUENCE_LENGTH] [--num-samples NUM_SAMPLES]\n                         [--data-path DATA_PATH] [--seed SEED]\n\nEvaluate perplexity of MLX models\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         Path to model or Hugging Face model ID\n  --trust-remote-code   Enable trusting remote code for tokenizer/model loading from Hugging Face.\n  --batch-size BATCH_SIZE\n                        Batch size for evaluation\n  --sequence-length SEQUENCE_LENGTH\n                        Sequence length for evaluation\n  --num-samples NUM_SAMPLES\n                        Number of samples to use (-1 for all available)\n  --data-path DATA_PATH\n                        A Hugging Face dataset which is compatible with an mlx-lm dataset format.\n  --seed SEED           Random seed for data sampling\n"
+    },
+    {
+      "name": "mlx_lm.server",
+      "argv": [
+        "mlx_lm.server",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.server [-h] [--model MODEL] [--adapter-path ADAPTER_PATH] [--host HOST]\n                     [--port PORT] [--allowed-origins ALLOWED_ORIGINS] [--draft-model DRAFT_MODEL]\n                     [--num-draft-tokens NUM_DRAFT_TOKENS] [--trust-remote-code]\n                     [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]\n                     [--chat-template CHAT_TEMPLATE] [--use-default-chat-template] [--temp TEMP]\n                     [--top-p TOP_P] [--top-k TOP_K] [--min-p MIN_P] [--max-tokens MAX_TOKENS]\n                     [--chat-template-args CHAT_TEMPLATE_ARGS]\n                     [--decode-concurrency DECODE_CONCURRENCY]\n                     [--prompt-concurrency PROMPT_CONCURRENCY]\n                     [--prefill-step-size PREFILL_STEP_SIZE]\n                     [--prompt-cache-size PROMPT_CACHE_SIZE]\n                     [--prompt-cache-bytes PROMPT_CACHE_BYTES] [--kv-bits KV_BITS]\n                     [--kv-group-size KV_GROUP_SIZE] [--quantized-kv-start QUANTIZED_KV_START]\n                     [--pipeline]\n\nMLX Http Server.\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         The path to the MLX model weights, tokenizer, and config\n  --adapter-path ADAPTER_PATH\n                        Optional path for the trained adapter weights and config.\n  --host HOST           Host for the HTTP server (default: 127.0.0.1)\n  --port PORT           Port for the HTTP server (default: 8080)\n  --allowed-origins ALLOWED_ORIGINS\n                        Allowed origins (default: *)\n  --draft-model DRAFT_MODEL\n                        A model to be used for speculative decoding.\n  --num-draft-tokens NUM_DRAFT_TOKENS\n                        Number of tokens to draft when using speculative decoding.\n  --trust-remote-code   Enable trusting remote code for tokenizer\n  --log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}\n                        Set the logging level (default: INFO)\n  --chat-template CHAT_TEMPLATE\n                        Specify a chat template for the tokenizer\n  --use-default-chat-template\n                        Use the default chat template\n  --temp TEMP           Default sampling temperature (default: 0.0)\n  --top-p TOP_P         Default nucleus sampling top-p (default: 1.0)\n  --top-k TOP_K         Default top-k sampling (default: 0, disables top-k)\n  --min-p MIN_P         Default min-p sampling (default: 0.0, disables min-p)\n  --max-tokens MAX_TOKENS\n                        Default maximum number of tokens to generate (default: 512)\n  --chat-template-args CHAT_TEMPLATE_ARGS\n                        A JSON formatted string of arguments for the tokenizer's\n                        apply_chat_template, e.g. '{\"enable_thinking\":false}'\n  --decode-concurrency DECODE_CONCURRENCY\n                        When a request is batchable then decode that many requests in parallel\n  --prompt-concurrency PROMPT_CONCURRENCY\n                        When a request is batchable then process that many prompts in parallel\n  --prefill-step-size PREFILL_STEP_SIZE\n                        Step size for prefill processing (default: 2048)\n  --prompt-cache-size PROMPT_CACHE_SIZE\n                        Maximum number of distinct KV caches to hold in the prompt cache\n  --prompt-cache-bytes PROMPT_CACHE_BYTES\n                        Maximum size in bytes of the KV caches\n  --kv-bits KV_BITS     Number of bits for KV cache quantization (e.g., 4 or 8). Reduces memory\n                        usage for long contexts. Disables batching, so requests are served one at\n                        a time. Default: None (full precision)\n  --kv-group-size KV_GROUP_SIZE\n                        Group size for KV cache quantization (default: 64)\n  --quantized-kv-start QUANTIZED_KV_START\n                        Token position to start KV cache quantization (default: 5000)\n  --pipeline            Use pipelining instead of tensor parallelism\n"
+    },
+    {
+      "name": "mlx_lm.share",
+      "argv": [
+        "mlx_lm.share",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.share [-h] [--path PATH] [--model MODEL] [--hostfile HOSTFILE] [--dst DST]\n                    [--tmpdir TMPDIR]\n\nDistribute a model to other nodes using MLX distributed.\n\noptions:\n  -h, --help           show this help message and exit\n  --path PATH          Path to a file or folder to share.\n  --model MODEL        The path to a local model or Hugging Face repo\n  --hostfile HOSTFILE  The file containing the hosts and connection information\n  --dst DST            The destination path in other nodes (defaults to --path or --model)\n  --tmpdir TMPDIR      Intermediate temporary directory to ensure successfull transfer\n"
+    },
+    {
+      "name": "mlx_lm.upload",
+      "argv": [
+        "mlx_lm.upload",
+        "--help"
+      ],
+      "exit_code": 0,
+      "help": "usage: mlx_lm.upload [-h] [--path PATH] [--upload-repo UPLOAD_REPO]\n\nUpload a model to the Hugging Face Hub\n\noptions:\n  -h, --help            show this help message and exit\n  --path PATH           Path to the MLX model.\n  --upload-repo UPLOAD_REPO\n                        The Hugging Face repo to upload the model to.\n"
+    }
+  ]
+}

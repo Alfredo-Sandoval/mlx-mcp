@@ -1,0 +1,867 @@
+{
+  "schema_version": 1,
+  "purpose": "MLX, MLX Data and MLX LM questions, each with the source text a good answer must cite. scripts/score_search.py scores search against them. A case with no support is a control that passes only by showing its warning. A source_gap note marks a question the docs cannot fully answer.",
+  "cases": [
+    {
+      "id": "device_compound",
+      "query": "Select the GPU device and show how to detect both Metal and CUDA availability.",
+      "limit": 3,
+      "language": "python",
+      "support": [
+        [
+          "python/_autosummary/mlx.core.set_default_device.html",
+          "Set the default device."
+        ],
+        [
+          "python/_autosummary/mlx.core.metal.is_available.html",
+          "Check if the Metal back-end is available."
+        ],
+        [
+          "python/_autosummary/mlx.core.cuda.is_available.html",
+          "Check if the CUDA back-end is available."
+        ]
+      ]
+    },
+    {
+      "id": "memory_compound",
+      "query": "Show active, peak, and cached allocation sizes, then clear the memory cache.",
+      "limit": 2,
+      "language": "python",
+      "support": [
+        [
+          "python/memory_management.html",
+          "Get the actively used memory in bytes."
+        ],
+        [
+          "python/memory_management.html",
+          "Get the peak amount of used memory in bytes."
+        ],
+        [
+          "python/memory_management.html",
+          "Get the cache size in bytes."
+        ],
+        [
+          "python/memory_management.html",
+          "Clear the memory cache."
+        ]
+      ]
+    },
+    {
+      "id": "take_negative",
+      "query": "Use mx.take to select rows on the GPU; what does axis=None mean?",
+      "limit": 2,
+      "language": "python",
+      "support": [
+        [
+          "python/_autosummary/mlx.core.take.html",
+          "1-D array prior to performing the take."
+        ]
+      ],
+      "forbidden_sources": [
+        "mlx.core.set_default_device.html"
+      ]
+    },
+    {
+      "id": "negated_device",
+      "query": "Do not switch the GPU; how does mx.take use integer indices?",
+      "limit": 2,
+      "language": "python",
+      "support": [
+        [
+          "python/_autosummary/mlx.core.take.html",
+          "Integer index or input array with integral type."
+        ]
+      ],
+      "forbidden_sources": [
+        "mlx.core.set_default_device.html"
+      ]
+    },
+    {
+      "id": "unsupported_api",
+      "query": "Does mx.no_grad() disable gradient tracking like a PyTorch context manager?",
+      "limit": 2,
+      "language": "python",
+      "support": [],
+      "warning": "The indexed docs don't define"
+    },
+    {
+      "id": "requested_version",
+      "query": "In MLX 0.18, how do I use mx.compile?",
+      "limit": 2,
+      "language": "python",
+      "support": [],
+      "warning": "only one version of these docs"
+    },
+    {
+      "id": "cpp_convolution",
+      "query": "mlx::core::conv2d groups parameter and stride",
+      "limit": 2,
+      "language": "cpp",
+      "support": [
+        [
+          "cpp/ops.html#operations",
+          "array conv2d(const array &input, const array &weight, const [std](https://ml-explore.github.io/mlx/build/html/cpp/ops.html#_CPPv4StRK5arraybi14StreamOrDevice \"std\")::pair<int, int> &stride = {1, 1}, const [std](https://ml-explore.github.io/mlx/build/html/cpp/ops.html#_CPPv4StRK5arraybi14StreamOrDevice \"std\")::pair<int, int> &padding = {0, 0}, const [std](https://ml-explore.github.io/mlx/build/html/cpp/ops.html#_CPPv4StRK5arraybi14StreamOrDevice \"std\")::pair<int, int> &dilation = {1, 1}, int groups = 1, StreamOrDevice s = {})"
+        ]
+      ]
+    },
+    {
+      "id": "safetensors",
+      "query": "What does mx.save_safetensors store and how are arrays named?",
+      "limit": 2,
+      "language": "python",
+      "support": [
+        [
+          "python/_autosummary/mlx.core.save_safetensors.html",
+          "Save array(s) to a binary file in `.safetensors` format."
+        ],
+        [
+          "python/_autosummary/mlx.core.save_safetensors.html",
+          "The dictionary of names to arrays to"
+        ]
+      ]
+    },
+    {
+      "id": "typo_quantization",
+      "query": "quantizied matmul with a grouped weight matrix",
+      "limit": 2,
+      "language": "python",
+      "support": [
+        [
+          "python/_autosummary/mlx.core.quantized_matmul.html",
+          "Perform the matrix multiplication with the quantized matrix `w`."
+        ]
+      ]
+    },
+    {
+      "id": "unbatched_argument",
+      "query": "With mx.vmap, how can I leave a particular argument unbatched?",
+      "limit": 2,
+      "language": "python",
+      "support": [
+        [
+          "python/_autosummary/mlx.core.vmap.html",
+          "then the corresponding input(s) are not vmapped."
+        ]
+      ]
+    },
+    {
+      "id": "attention_source_gap",
+      "query": "Does True allow or block attention in mx.fast.scaled_dot_product_attention boolean masks?",
+      "limit": 2,
+      "language": "python",
+      "support": [
+        [
+          "python/_autosummary/mlx.core.fast.scaled_dot_product_attention.html",
+          "the mask is an array it can be a boolean or additive mask."
+        ]
+      ],
+      "source_gap": "The indexed definition permits boolean masks but does not specify True/False semantics; retrieving it cannot establish those semantics."
+    },
+    {
+      "id": "load-generate-python",
+      "query": "How do I load a model from the Hugging Face Hub and generate a reply to a prompt using Python?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#python-api",
+          "model, tokenizer = load(\"mlx-community/Mistral-7B-Instruct-v0.3-4bit\")"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#python-api",
+          "text = generate(model, tokenizer, prompt=prompt, verbose=True)"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "generate-cli-model",
+      "query": "What's the terminal command to download a specific Hugging Face model and generate text from a custom prompt?",
+      "package": "mlx-lm",
+      "limit": 2,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#command-line",
+          "mlx_lm.generate --model mistralai/Mistral-7B-Instruct-v0.3 --prompt \"hello\""
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "default-model",
+      "query": "If I don't pass a model, which model does mlx-lm use by default for chat and generation?",
+      "package": "mlx-lm",
+      "limit": 2,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#quick-start",
+          "mlx-community/Llama-3.2-3B-Instruct-4bit"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "streaming-print",
+      "query": "How can I print the model's output token by token as it's generated, instead of waiting for the whole response?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#streaming",
+          "for response in stream_generate(model, tokenizer, prompt, max_tokens=512):"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#streaming",
+          "print(response.text, end=\"\", flush=True)"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "stream-finish-reason",
+      "query": "When I stream a generated response, how do I tell whether it stopped because it hit the token limit or because the model produced a stop token?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/generate.py",
+          "finish_reason (str): The reason the response is being sent: \"length\", \"stop\" or `None`"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "sampling-temp-topp",
+      "query": "How do I make mlx-lm's text generation more or less random, and is there a nucleus sampling option?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/sample_utils.py",
+          "temp (float): The temperature for sampling, if 0 the argmax is used."
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/sample_utils.py",
+          "top_p (float, optional): Nulceus sampling, higher means model considers"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "sampling-topk-minp",
+      "query": "What do the top-k and min-p sampling options control when generating text?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/sample_utils.py",
+          "top_k (int, optional): The top k tokens ranked by probability to constrain"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/sample_utils.py",
+          "min_p (float, optional): The minimum value (scaled by the top token's"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "repetition-penalty",
+      "query": "How do I stop the model from repeating the same phrases over and over during generation?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/sample_utils.py",
+          "Make repetition penalty processor."
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/sample_utils.py",
+          "penalty (float): The repetition penalty factor to be applied."
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "xtc-sampling-cli",
+      "query": "How do I turn on XTC sampling from the command line, and what does the threshold flag do?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/Alfredo-Sandoval/mlx-mcp/blob/v0.1.1/src/mlx_mcp/source_data/mlx_lm_cli_help.json#L102-L108",
+          "Probability of XTC sampling to happen each next token"
+        ],
+        [
+          "https://github.com/Alfredo-Sandoval/mlx-mcp/blob/v0.1.1/src/mlx_mcp/source_data/mlx_lm_cli_help.json#L102-L108",
+          "Threshold the probs of each next token candidate to be sampled by XTC"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "chat-template-apply",
+      "query": "How do I turn a list of chat messages into a single prompt string using the model's own chat template before generating?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#python-api",
+          "messages = [{\"role\": \"user\", \"content\": prompt}]"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#python-api",
+          "add_generation_prompt=True,"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "chat-template-server-override",
+      "query": "Can I use a chat template other than the one bundled with the model when I run mlx-lm's local API server?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/Alfredo-Sandoval/mlx-mcp/blob/v0.1.1/src/mlx_mcp/source_data/mlx_lm_cli_help.json#L147-L153",
+          "Specify a chat template for the tokenizer"
+        ],
+        [
+          "https://github.com/Alfredo-Sandoval/mlx-mcp/blob/v0.1.1/src/mlx_mcp/source_data/mlx_lm_cli_help.json#L147-L153",
+          "Use the default chat template"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "prompt-cache-reuse",
+      "query": "I keep sending the same long system prompt to the model with different questions — how can I avoid reprocessing it every single time?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#long-prompts-and-generations",
+          "Caching prompts can substantially speedup reusing the same long context with"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#long-prompts-and-generations",
+          "The cached prompt is treated as a prefix to the supplied prompt."
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "prompt-cache-cli",
+      "query": "What's the command to precompute a prompt and save its cache to a file so I can reuse it in a later generation?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#long-prompts-and-generations",
+          "--prompt-cache-file mistral_prompt.safetensors"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "trim-prompt-cache-api",
+      "query": "In the Python API, is there a way to roll back part of an existing prompt cache instead of rebuilding it from scratch?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/models/cache.py",
+          "Trim the model's cache by the given number of tokens."
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/models/cache.py",
+          "This function will trim the cache if possible (in-place) and return the"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "batch-generate",
+      "query": "How can I efficiently generate text for a whole list of prompts at once instead of looping over them one at a time?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/generate.py",
+          "Generate responses for the given batch of prompts."
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/generate.py",
+          "prompts (List[List[int]]): The input prompts."
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "convert-quantize-cli",
+      "query": "How do I download a Hugging Face model and produce a quantized MLX version of it from the command line?",
+      "package": "mlx-lm",
+      "limit": 2,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#command-line",
+          "mlx_lm.convert --model mistralai/Mistral-7B-Instruct-v0.3 -q"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "convert-python-api",
+      "query": "Is there a way to quantize and convert a model directly from Python instead of using a command-line tool?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#python-api",
+          "convert(repo, quantize=True, upload_repo=upload_repo)"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "dwq-lowbit",
+      "query": "What's a good way to shrink a model down to very low bit-widths, like 2 or 3 bits, without destroying quality?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LEARNED_QUANTS.md#dwq",
+          "Use `mlx_lm.dwq` to run DWQ on a given model."
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LEARNED_QUANTS.md#tips",
+          "DWQ works best distilling to lower precision, anywhere from 2-bit to 4-bit"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "lora-data-chat",
+      "query": "How do I fine-tune a model on my own chat data?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#local-datasets",
+          "{\"role\": \"system\", \"content\": \"You are a helpful assistant.\"}"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "lora-finetune-cli",
+      "query": "What's the command to fine-tune a language model on my own dataset with a low-rank adapter?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fine-tune",
+          "--iters 600"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fine-tune",
+          "--fine-tune-type full"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "qlora-quantized",
+      "query": "Do I need to do anything special to fine-tune a model that's already been quantized to 4-bit?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fine-tune",
+          "then the training will use QLoRA,"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fine-tune",
+          "otherwise it will use regular LoRA."
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "mask-prompt",
+      "query": "When fine-tuning on chat data, can I make the model only learn from the assistant's replies instead of also fitting the user's turns?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/Alfredo-Sandoval/mlx-mcp/blob/v0.1.1/src/mlx_mcp/source_data/mlx_lm_cli_help.json#L120-L126",
+          "Mask the prompt in the loss when training"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "fuse-adapters",
+      "query": "After fine-tuning, how do I merge my adapter weights back into the base model to get one standalone model?",
+      "package": "mlx-lm",
+      "limit": 2,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fuse",
+          "You can generate a model fused with the low-rank adapters using the"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fuse",
+          "This will by default load the adapters from `adapters/`, and save the fused"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "fuse-gguf-export",
+      "query": "Can I export my fine-tuned model to GGUF so I can run it with llama.cpp?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fuse",
+          "Export the fused model to GGUF. Note GGUF support is limited to Mistral,"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#fuse",
+          "mlx_lm.fuse \\\n    --model mistralai/Mistral-7B-v0.1 \\\n    --export-gguf"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "server-start",
+      "query": "How do I run a local web server that serves a model through an OpenAI-style chat API?",
+      "package": "mlx-lm",
+      "limit": 2,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#http-model-server",
+          "mlx_lm.server --model <path_to_model_or_hf_repo>"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#http-model-server",
+          "This will start a text generation server on port `8080` of the `localhost`"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "server-temperature-stream",
+      "query": "When I send a chat request to the local model server, how do I control the sampling temperature and get the response streamed back incrementally?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#request-fields",
+          "temperature`: (Optional) A float specifying the sampling temperature."
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#request-fields",
+          "stream`: (Optional) A boolean indicating if the response should be"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "manage-cache",
+      "query": "How do I see which models I've already downloaded and cached locally, and how do I delete one I don't need anymore?",
+      "package": "mlx-lm",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/MANAGE.md#managing-models",
+          "mlx_lm.manage --scan"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/MANAGE.md#managing-models",
+          "mlx_lm.manage --delete --pattern mlx-community/Mistral-7B-Instruct-v0.2-4bit"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "upload-model",
+      "query": "After converting and quantizing a model, how do I publish it to the Hugging Face Hub?",
+      "package": "mlx-lm",
+      "limit": 2,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/README.md#command-line",
+          "You can upload new models to Hugging Face by specifying `--upload-repo` to"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "npz-safetensors-load",
+      "query": "How do I load an array I previously saved to a .npz or .safetensors file?",
+      "package": "mlx",
+      "limit": 2,
+      "support": [
+        [
+          "python/_autosummary/mlx.core.load.html#mlx-core-load",
+          "The supported formats are `.npy`, `.npz`, `.safetensors`, and `.gguf`."
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "quantize-nn-module",
+      "query": "How do I quantize the layers of an existing neural network module in place?",
+      "package": "mlx",
+      "limit": 2,
+      "support": [
+        [
+          "python/_autosummary/mlx.nn.quantize.html#mlx-nn-quantize",
+          "Quantize the sub-modules of a module according to a predicate."
+        ],
+        [
+          "python/_autosummary/mlx.nn.quantize.html#mlx-nn-quantize",
+          "By default all layers that define a `to_quantized()` method will be quantized."
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "mx-eval-purpose",
+      "query": "What does mx.eval actually do, and when do I need to call it on my arrays?",
+      "package": "mlx",
+      "limit": 2,
+      "support": [
+        [
+          "python/_autosummary/mlx.core.eval.html#mlx-core-eval",
+          "Evaluate an [`array`](https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.array.html#mlx.core.array \"mlx.core.array\") or tree of [`array`](https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.array.html#mlx.core.array \"mlx.core.array\")."
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "mx-compile-purpose",
+      "query": "How do I compile a function in MLX to make it run faster, and what can I pass in as captured inputs?",
+      "package": "mlx",
+      "limit": 2,
+      "support": [
+        [
+          "python/_autosummary/mlx.core.compile.html#mlx-core-compile",
+          "Returns a compiled function which produces the same output as `fun`."
+        ],
+        [
+          "python/_autosummary/mlx.core.compile.html#mlx-core-compile",
+          "**inputs** (list or dict, optional) – These inputs will be captured during the function compilation"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "mx-save-array",
+      "query": "How do I save a single array to disk in MLX?",
+      "package": "mlx",
+      "limit": 2,
+      "support": [
+        [
+          "python/_autosummary/mlx.core.save.html#mlx-core-save",
+          "Save the array to a binary file in `.npy` format."
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "load-weights-into-module",
+      "query": "How do I load a saved set of weights into an nn.Module?",
+      "package": "mlx",
+      "limit": 3,
+      "support": [
+        [
+          "python/nn/_autosummary/mlx.nn.Module.load_weights.html#mlx-nn-module-load-weights",
+          "Update the model’s weights from a `.npz`, a `.safetensors` file, or a list."
+        ],
+        [
+          "python/nn/_autosummary/mlx.nn.Module.load_weights.html#mlx-nn-module-load-weights",
+          "**strict** (bool, optional) – If `True` then checks that the provided weights exactly match the parameters"
+        ]
+      ],
+      "language": "python"
+    },
+    {
+      "id": "lora-test-perplexity",
+      "query": "After training an adapter, how can I measure perplexity on my test set?",
+      "package": "mlx-lm",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#evaluate",
+          "To compute test set perplexity use:"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#evaluate",
+          "--test"
+        ]
+      ]
+    },
+    {
+      "id": "lora-checkpoint-memory",
+      "query": "How can I reduce memory consumption during LoRA training by recomputing activations?",
+      "package": "mlx-lm",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#memory-issues",
+          "Gradient checkpointing lets you trade-off memory use (less) for computation"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LORA.md#memory-issues",
+          "--grad-checkpoint"
+        ]
+      ]
+    },
+    {
+      "id": "server-list-models",
+      "query": "Which HTTP endpoint lists the locally available language models?",
+      "package": "mlx-lm",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#list-models",
+          "curl localhost:8080/v1/models"
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#list-models",
+          "The Hugging Face repo id."
+        ]
+      ]
+    },
+    {
+      "id": "server-token-usage",
+      "query": "Where does the model server report the counts of prompt tokens and generated tokens in its response?",
+      "package": "mlx-lm",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#response-fields",
+          "`prompt_tokens`: The number of prompt tokens processed."
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#response-fields",
+          "`completion_tokens`: The number of tokens generated."
+        ]
+      ]
+    },
+    {
+      "id": "server-stop-sequences",
+      "query": "Can I send stop sequences in a request to the MLX LM server?",
+      "package": "mlx-lm",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/SERVER.md#request-fields",
+          "`stop`: (Optional) An array of strings or a single string."
+        ]
+      ]
+    },
+    {
+      "id": "dwq-memory-options",
+      "query": "How do I reduce memory needed when distilling with DWQ?",
+      "package": "mlx-lm",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LEARNED_QUANTS.md#memory-use",
+          "Distill from an 8-bit model instead of a 16-bit model."
+        ],
+        [
+          "https://github.com/ml-explore/mlx-lm/blob/93e6d4a6447b3080861985947f0820e76fcb957d/mlx_lm/LEARNED_QUANTS.md#memory-use",
+          "`--max-seq-length 512`"
+        ]
+      ]
+    },
+    {
+      "id": "ordered-loading",
+      "query": "How can I load samples in background threads while keeping their original order?",
+      "package": "mlx-data",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Buffer.ordered_prefetch.html#mlx-data-buffer-ordered-prefetch",
+          "Fetch samples in background threads, while preserving original ordering."
+        ]
+      ]
+    },
+    {
+      "id": "variable-length-batches",
+      "query": "How do I batch variable-length token sequences with about the same amount of work per batch?",
+      "package": "mlx-data",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Stream.dynamic_batch.html#mlx-data-stream-dynamic-batch",
+          "Dynamic batching returns batches with approximately the same number of total elements."
+        ]
+      ]
+    },
+    {
+      "id": "stream-shuffle-buffer",
+      "query": "How does shuffle randomize a stream when it cannot hold the whole dataset in memory?",
+      "package": "mlx-data",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Stream.shuffle.html#mlx-data-stream-shuffle",
+          "A buffer of size `buffer_size` is filled with samples and then a random sample is returned from the buffer and replaced with a new one from the stream."
+        ]
+      ]
+    },
+    {
+      "id": "batch-concatenation",
+      "query": "With mlx.data.Buffer.batch, what changes when I specify a batch dimension?",
+      "package": "mlx-data",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx-data/build/html/python/_autosummary/mlx.data.Buffer.batch.html#mlx-data-buffer-batch",
+          "When a batch dimension is not provided, the arrays are stacked. If it is provided, the arrays are concatenated along that dimension."
+        ]
+      ]
+    },
+    {
+      "id": "block-gradients",
+      "query": "How do I keep an array unchanged but stop gradients from flowing through it?",
+      "package": "mlx",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.stop_gradient.html#mlx-core-stop-gradient",
+          "The operation is the identity but it prevents gradients from flowing through the array."
+        ]
+      ]
+    },
+    {
+      "id": "async-eval-status",
+      "query": "Is mx.async_eval considered a stable API?",
+      "package": "mlx",
+      "language": "python",
+      "limit": 3,
+      "support": [
+        [
+          "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.async_eval.html#mlx-core-async-eval",
+          "This is an experimental API and may change in future versions."
+        ]
+      ]
+    }
+  ]
+}

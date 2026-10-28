@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "version": "0.32.2",
+  "commit": "93e6d4a6447b3080861985947f0820e76fcb957d",
+  "guides": ["README.md", "mlx_lm/README.md", "mlx_lm/LORA.md", "mlx_lm/SERVER.md", "mlx_lm/LEARNED_QUANTS.md", "mlx_lm/MANAGE.md", "mlx_lm/BENCHMARKS.md"],
+  "wheel_filename": "mlx_lm-0.32.2-py3-none-any.whl",
+  "wheel_url": "https://files.pythonhosted.org/packages/d1/4f/000eefdeb41388782b47e7f39904cf2d9e7e49a60df5e172097c358dba8e/mlx_lm-0.32.2-py3-none-any.whl",
+  "capture_filename": "mlx_lm_cli_help.json",
+  "capture_tag": "v0.1.1",
+  "capture_repository": "https://github.com/Alfredo-Sandoval/mlx-mcp",
+  "capture_path": "src/mlx_mcp/source_data/mlx_lm_cli_help.json"
+}

@@ -1,0 +1,239 @@
+{
+  "purpose": "Searches that must keep returning the expected pages. Known weak searches are marked.",
+  "cases": [
+    {
+      "id": "runtime",
+      "query": "How do I require GPU execution in MLX and check whether Metal or CUDA is available?",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.set_default_device.html"
+      ],
+      "known_source_gap": false,
+      "limit": 3
+    },
+    {
+      "id": "training",
+      "query": "How should model and optimizer state be passed to mx.compile when compiling a training step?",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.compile.html#mlx-core-compile"
+      ],
+      "known_source_gap": false,
+      "limit": 3
+    },
+    {
+      "id": "layout",
+      "query": "What are the input and weight layouts for mlx.core.conv3d and which groups values are supported?",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.conv3d.html#mlx-core-conv3d"
+      ],
+      "known_source_gap": false,
+      "limit": 3
+    },
+    {
+      "id": "kernels",
+      "query": "How do custom Metal kernels handle noncontiguous inputs and strides with ensure_row_contiguous?",
+      "expected_sources": [
+        "dev/custom_metal_kernels.html#using-shape-strides"
+      ],
+      "known_source_gap": false,
+      "limit": 3
+    },
+    {
+      "id": "checkpoint",
+      "query": "How do I save and restore optimizer state and model parameters for resuming MLX training?",
+      "expected_sources": [
+        "python/optimizers.html#saving-and-loading"
+      ],
+      "known_source_gap": false,
+      "limit": 3
+    },
+    {
+      "id": "eval",
+      "query": "What must be passed to mx.eval after an optimizer update in an MLX training loop?",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.eval.html#mlx-core-eval"
+      ],
+      "known_source_gap": false,
+      "limit": 3
+    },
+    {
+      "id": "device",
+      "query": "mlx.core.default_device and mlx.core.set_default_device GPU",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.set_default_device.html#mlx-core-set-default-device"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "rng",
+      "query": "How can I save and restore mlx.core.random.state to reproduce random draws?",
+      "expected_sources": [
+        "python/random.html#random"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "dropout",
+      "query": "How does mlx.nn.Dropout behave in training and evaluation mode?",
+      "expected_sources": [
+        "python/nn/_autosummary/mlx.nn.Dropout.html#mlx-nn-dropout"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "loss",
+      "query": "mlx.nn.losses.cross_entropy expects logits and supports class index targets and reduction",
+      "expected_sources": [
+        "python/nn/_autosummary_functions/mlx.nn.losses.cross_entropy.html#mlx-nn-losses-cross-entropy"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "ownership",
+      "query": "Does numpy.asarray on an MLX array share memory and when does it evaluate the array?",
+      "expected_sources": [
+        "usage/numpy.html#conversion-to-numpy-and-other-frameworks"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "timing",
+      "query": "How do I accurately benchmark MLX lazy GPU operations using eval and synchronize?",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.synchronize.html#mlx-core-synchronize"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "customgrad",
+      "query": "mlx.core.custom_function custom VJP cotangents and primals first order gradients",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.custom_function.html#mlx-core-custom-function"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "normalization",
+      "query": "mlx.nn.InstanceNorm spatial axes channels last affine epsilon",
+      "expected_sources": [
+        "python/nn/_autosummary/mlx.nn.InstanceNorm.html#mlx-nn-instancenorm"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "scatter",
+      "query": "mlx.core.array.at add duplicate indices scatter accumulation",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.array.at.html#mlx-core-array-at"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "labels",
+      "query": "mlx.core.argmax returns first index when multiple maxima are equal",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.argmax.html#mlx-core-argmax"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "sgd",
+      "query": "mlx.optimizers.SGD momentum weight_decay nesterov update formula",
+      "expected_sources": [
+        "python/optimizers/_autosummary/mlx.optimizers.SGD.html#mlx-optimizers-sgd"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "precision",
+      "query": "MLX float32 sum accumulation and float16 reduction dtype",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.sum.html"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "broadcast",
+      "query": "How does MLX broadcasting handle a dimension of size one in elementwise arithmetic?",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.broadcast_arrays.html"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "broadcast-exact",
+      "query": "mlx.core.broadcast_arrays",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.broadcast_arrays.html#mlx-core-broadcast-arrays"
+      ],
+      "known_source_gap": false,
+      "limit": 1
+    },
+    {
+      "id": "threads",
+      "query": "Is MLX thread safe for graph construction and concurrent evaluation from multiple Python threads?",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.new_thread_unsafe_stream.html#mlx-core-new-thread-unsafe-stream"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "interpolation",
+      "query": "mlx.nn.Upsample linear interpolation align_corners channels last",
+      "expected_sources": [
+        "python/nn/_autosummary/mlx.nn.Upsample.html#mlx-nn-upsample"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "memory",
+      "query": "mlx.core.get_active_memory get_cache_memory get_peak_memory what is included",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.get_active_memory.html#mlx-core-get-active-memory"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "metal-availability",
+      "query": "mlx.core.metal.is_available",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.metal.is_available.html#mlx-core-metal-is-available"
+      ],
+      "known_source_gap": false,
+      "limit": 2
+    },
+    {
+      "id": "tf32",
+      "query": "MLX_ENABLE_TF32 CUDA float32",
+      "expected_sources": [
+        "usage/environment_variables.html#general"
+      ],
+      "known_source_gap": false,
+      "limit": 1
+    },
+    {
+      "id": "save",
+      "query": "mlx.core.save_safetensors array dtype metadata",
+      "expected_sources": [
+        "python/_autosummary/mlx.core.save_safetensors.html#mlx-core-save-safetensors"
+      ],
+      "known_source_gap": false,
+      "limit": 1
+    }
+  ]
+}
