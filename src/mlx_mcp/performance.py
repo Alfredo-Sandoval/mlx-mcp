@@ -8,6 +8,9 @@ edits and runs the user's project using its existing tools and permissions.
 1. Establish a representative baseline.
 Use the project's environment and real inputs. Record hardware, installed MLX
 version, device, model/checkpoint, dtype, resolution, batch size and code revision.
+Record the imported source location when a checkout can shadow an installed
+distribution. Keep dependency installs and source changes outside timed runs;
+restart in a fresh process after a runtime change.
 Separate model loading, first-call compilation, warmup and steady-state work.
 Include partial final batches in sustained measurements: a new batch shape can
 trigger compilation even after the usual batch has warmed up. Confirm optimized
@@ -67,6 +70,7 @@ real inputs. Measure complete-pipeline impact, not just isolated kernel speed.
 Change one major variable at a time. Use the same inputs and explicit correctness
 criteria; report exact equality where achieved, otherwise name the numerical or
 task-level difference. Compare warm and sustained runs without competing GPU jobs.
+Coordinate an exclusive GPU window with other sessions before measuring.
 When clock or thermal state can drift, interleave A/B trials with equivalent
 warmup and fixed cool-downs, balance their order, and compare paired results and
 medians. Report cooled short bursts separately from thermally steady throughput;
