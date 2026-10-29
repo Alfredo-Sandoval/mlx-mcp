@@ -134,6 +134,10 @@ terminal and use the path it prints as the command.
 
 ## Good to know
 
+- For code optimization, `get_mlx_performance_workflow` guides the coding client
+  through synchronized baselines, bottleneck profiling, custom-kernel decisions
+  and before/after correctness comparisons. The client runs and edits the project;
+  this tool returns guidance and does not execute project code.
 - The bundled docs may not match the MLX version you have installed.
   `uvx --python 3.13 mlx-mcp info` shows the versions mlx-mcp has.
   `uvx --python 3.13 mlx-mcp prepare --refresh` downloads the latest MLX and

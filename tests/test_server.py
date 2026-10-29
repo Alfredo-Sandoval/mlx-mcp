@@ -81,8 +81,9 @@ def test_protocol_catalog_input_and_missing_index(
 ) -> None:
 
     monkeypatch.setenv("MLX_MCP_CACHE", str(tmp_path))
+    resource = LazyResource(lambda: DocumentationService(tmp_path))
     monkeypatch.setattr(
-        server, "_service", LazyResource(lambda: DocumentationService(tmp_path))
+        server, "_service", resource
     )
 
     async def check() -> None:
@@ -93,6 +94,7 @@ def test_protocol_catalog_input_and_missing_index(
                 "search_mlx_docs",
                 "fetch_mlx_docs",
                 "get_mlx_docs_info",
+                "get_mlx_performance_workflow",
             }
             schema = tool_schema(tools_by_name["search_mlx_docs"])
             assert schema["required"] == ["query"]
@@ -102,6 +104,11 @@ def test_protocol_catalog_input_and_missing_index(
                 "language",
                 "package",
             }
+            workflow = await client.call_tool("get_mlx_performance_workflow", {})
+            assert not workflow.is_error
+            assert "synchronize" in tool_text(workflow)
+            assert "correctness" in tool_text(workflow)
+            assert resource.peek() is None
             missing = await client.call_tool(
                 "search_mlx_docs", {"query": "lazy evaluation"}
             )
